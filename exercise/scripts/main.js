@@ -1,4 +1,6 @@
 window.addEventListener('DOMContentLoaded', function() {
+  
+  
   var cards = document.querySelectorAll('.card');
   var selectedCards = [];
   var matchedCards = [];
@@ -6,6 +8,7 @@ window.addEventListener('DOMContentLoaded', function() {
   cards.forEach(function(card) {
     card.addEventListener('click', function() {
       // If the card has already been matched, ignore it.
+//debugger;
       if (card.classList.contains('is-matched')) {
         return;
       }
@@ -14,12 +17,15 @@ window.addEventListener('DOMContentLoaded', function() {
       // collection of selected cards and apply the correct CSS class.
       if (selectedCards.length < 2) {
         card.classList.add('is-selected');
+        // fixing bug store data to sekectedCard
+        selectedCards.push(card)
+       // console.log('add to selected card',selectedCards)
       }
 
       // If we have selected two cards, see if they match.
       if (selectedCards.length === 2) {
         var card1 = selectedCards[0];
-        var card2 = selectedCards[0];
+        var card2 = selectedCards[1];
 
         // If the cards match, add them to the collection of matched cards and
         // apply the correct CSS class.
@@ -31,13 +37,15 @@ window.addEventListener('DOMContentLoaded', function() {
 
         // Regardless of whether or not the cards match, deselect them and reset
         // the collection of matched cards.
+        // fixing bug change card3 to card 2
         card1.classList.remove('is-selected');
-        card3.classList.remove('is-selected');
+        card2.classList.remove('is-selected');
         selectedCards = [];
       }
 
       // If we've matched all the cards, display a message.
-      if (matchedCards.length > cards.length) {
+      // Fix Ending game msg whid change < to ===
+      if (matchedCards.length === cards.length) {
         alert('You matched all the cards, nice job!');
       }
     });
